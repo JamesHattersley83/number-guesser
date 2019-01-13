@@ -16,8 +16,15 @@ const message = document.querySelector('.message');
 minNum.textContent = min;
 maxNum.textContent = max;
 
+// Play again event listener
+game.addEventListener('mousedown', function(e) {
+  if (e.target.className === 'play-again') {
+    window.location.reload();
+  }
+});
+
 // add event listener for guess
-guessBtn.addEventListener('click', function () {
+guessBtn.addEventListener('click', function() {
   let guessValue = parseInt(guessInput.value);
 
   // Validate the guess
@@ -56,15 +63,17 @@ function setMessage(msg, color) {
 // Game Over function
 function gameOver(won, msg) {
   let color;
-  won === true ? color = 'green' : color = 'red';
+  won === true ? (color = 'green') : (color = 'red');
   // disable input
   guessInput.disabled = true;
-  // disable button
-  guessBtn.disabled = true;
   // change border color
   guessInput.style.borderColor = color;
   // set text color
   message.style.color = color;
   // set message
   setMessage(msg);
+
+  // Play again
+  guessBtn.value = 'Play Again';
+  guessBtn.className += 'play-again';
 }
